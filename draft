@@ -1,0 +1,6 @@
+rf best_params_ rbe {'n_estimators': 1600, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'auto', 'max_depth': 90, 'bootstrap': True}
+rf best_params_ alpha {'n_estimators': 400, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': None, 'bootstrap': False}
+rf best_params_ beta {'n_estimators': 800, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': 100, 'bootstrap': False}
+gbr best_params_ beta {'n_estimators': 200, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 6, 'learning_rate': 0.013}
+gbr best_params_ alpha {'n_estimators': 1800, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 4, 'learning_rate': 0.063}
+gbr best_params_ rbe {'n_estimators': 600, 'min_samples_leaf': 2, 'max_features': 1.0, 'max_depth': 4, 'learning_rate': 0.075}
