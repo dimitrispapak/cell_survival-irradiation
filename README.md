@@ -2,7 +2,7 @@
 An ML application that predicts the cell survival depending on the features of the radiation it receives
 
 To run the program you need to pip install the following dependencies:
--joblib==0.13.2
+1. joblib==0.13.2
 -matplotlib==3.1.1
 -numpy==1.16.4
 -seaborn==0.9.0
