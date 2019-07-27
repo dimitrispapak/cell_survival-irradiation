@@ -16,6 +16,7 @@ One of the files holds data that contain the coefficients of the quadratic model
 The other dataset (data_rbe) is pretty similar to the pide.csv, but the irradiation effect on the cells is expressed with RBE quantity.
 
 Workflow:
+- Create two folders in the program root directory: models/ and plots/
 - Run the catboost_model.py
   this will create model that will be saved and some performance plots in the plots folder
 - Similaliry, run the support_vector_regression.py
