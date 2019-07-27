@@ -3,13 +3,13 @@ An ML application that predicts the cell survival depending on the features of t
 
 To run the program you need to pip install the following dependencies:
 1. joblib==0.13.2
--matplotlib==3.1.1
--numpy==1.16.4
--seaborn==0.9.0
--pandas==0.24.2
--catboost==0.15.2
--shap==0.29.3
--scikit_learn==0.21.2
+2. matplotlib==3.1.1
+3. numpy==1.16.4
+4. seaborn==0.9.0
+5. pandas==0.24.2
+5. catboost==0.15.2
+6. shap==0.29.3
+7. scikit_learn==0.21.2
 
 The application is loading two csv files, which are the datasets that contains data from irradiation studies
 One of the files holds data that contain the coefficients of the quadratic model, in the code it called pide.csv and it's  the Particle Irradiation Data Ensemble (PIDE) dataset provided by the GSII in Germany.
