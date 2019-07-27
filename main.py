@@ -6,16 +6,6 @@ from catboost import CatBoostRegressor
 import sys
 import tools
 
-# cell = input('cell:')
-# type = input('tumor or normal cell (t/n):')
-# phase = input('phase:')
-# genl = float(input('genomic length (in millions bp):'))
-# ion = input('ion:')
-# charge = int(input('charge:'))
-# irmods = input('irmods:')
-# let = float(input('LET:'))
-# E = float(input('E:'))
-
 # Get all models as a tuple
 def load_models():
     #svr models
@@ -38,7 +28,7 @@ def load_models():
     vr_models = (vr_rbe_model,vr_alpha_model,vr_beta_model)
     return srv_models, catboost_models,vr_models
 
-# impute missing data 'nan' for categorical and '' for numeric
+# impute missing data
 def impute(lame_input,model):
     if model == 'rbe':
         dataset = pd.read_csv('./data/data_rbe.csv')
@@ -46,15 +36,23 @@ def impute(lame_input,model):
     else:
         dataset = pd.read_csv('./data/pide.csv',usecols = range(3,16))
         x = dataset.drop(['alpha_l','alpha_x','beta_l','beta_x'],axis=1)
+
+    headers = x.columns.values
+    categorical = dataset.select_dtypes(include=[object])
+    catlist = [x.columns.get_loc(c) for c in categorical.columns if c in categorical]
+    for index in range(len(lame_input)):
+        if  not np.isin(lame_input[index], dataset.iloc[:,index].values):
+            if index in catlist:
+                lame_input[index] = np.nan
+            else:
+                lame_input[index]= -1
     a = [z for z,y in enumerate(lame_input) if y == -1 or str(y)=='nan']
+    input_df = pd.DataFrame(np.array([lame_input]),columns=headers)
     if len(a)<1:
         return lame_input
     else:
-        headers = x.columns.values
         output = lame_input
-        input_df = pd.DataFrame(np.array([lame_input]),columns=headers)
-        categorical = dataset.select_dtypes(include=[object])
-        catlist = [x.columns.get_loc(c) for c in categorical.columns if c in categorical]
+        # catlist = [x.columns.get_loc(c) for c in categorical.columns if c in categorical]
         for column in input_df:
             if column not in list(categorical):
                 input_df[column] = pd.to_numeric(input_df[column],errors='coerce')
@@ -131,6 +129,17 @@ def predictions(input,models):
     df = pd.DataFrame(dict, columns = headers)
     return df
 
-input =['HeLa','n','a',6,'4He',2,'m',23.045,7.605]
+cell = input('cell:')
+type = input('tumor or normal cell (t/n):')
+phase = input('phase:')
+genl = input('genomic length (in millions bp):')
+ion = input('ion:')
+charge = input('charge:')
+irmods = input('irmods:')
+let = input('LET:')
+E =input('E:')
+
+input =[cell,type,phase,genl,ion,charge,irmods,let,E]
+
 models = load_models()
 print(predictions(input,models))
