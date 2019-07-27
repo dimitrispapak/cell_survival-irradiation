@@ -132,7 +132,7 @@ def predictions(input,models):
 cell = input('cell:')
 type = input('tumor or normal cell (t/n):')
 phase = input('phase:')
-genl = input('genomic length (in millions bp):')
+genl = input('genomic length (in bp):')
 ion = input('ion:')
 charge = input('charge:')
 irmods = input('irmods:')
