@@ -13,7 +13,7 @@ To run the program you need to pip install the following dependencies:
 
 The application is loading two csv files, which are the datasets that contains data from irradiation studies
 One of the files holds data that contain the coefficients of the quadratic model, in the code it called pide.csv and it's  the Particle Irradiation Data Ensemble (PIDE) dataset provided by the GSII in Germany.
-The other dataset (data_rbe) is pretty similar to the pide.csv, but the irradiation effect on the cells is expressed with RBE quantity.
+The other dataset (data_rbe.csv) is pretty similar to the pide.csv, but the irradiation effect on the cells is expressed with RBE quantity.
 
 Workflow:
 - Create two folders in the program root directory: models/ and plots/
