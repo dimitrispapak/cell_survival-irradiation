@@ -75,8 +75,8 @@ gbr_random = RandomizedSearchCV(estimator = gbr,
 # gbr_random.fit(rbe[0],rbe[1])
 # print(gbr_random.best_params_)
 
-parameters = {'kernel': ('linear', 'rbf','poly'), 'C':[1.5, 10],'gamma': [1e-7, 1e-4],'epsilon':[0.1,0.2,0.5,0.3,0.05]}
+parameters = {'kernel': ('linear', 'rbf','poly'), 'C':[1, 10, 100, 1000,10000],'gamma': [1e-3, 1e-4],'epsilon':[0.1,0.2,0.5,0.3,0.05]}
 svr = SVR()
-clf =GridSearchCV(svr, parameters,cv=5)
+clf =GridSearchCV(svr, parameters,cv=5,n_jobs=7)
 clf.fit(rbe[0],rbe[1])
 print(clf.best_params_)
