@@ -1,13 +1,11 @@
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import VotingRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import VotingRegressor,RandomForestRegressor,GradientBoostingRegressor
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.svm import SVR
 import tools
-from sklearn.model_selection import RandomizedSearchCV
-
-
+from sklearn.model_selection import RandomizedSearchCV,GridSearchCV
+import sys
 # get the data from csv file
 data=pd.read_csv('./data/pide.csv',usecols = range(3,16)).drop(['alpha_x','beta_x'],axis=1)
 data_rbe = pd.read_csv('./data/data_rbe.csv')
@@ -33,6 +31,7 @@ min_samples_leaf = [1, 2, 4]
 bootstrap = [True, False]# Create the random grid
 learning_rate = [np.around(x, decimals=3) for x in np.linspace(0.001, 0.1, num = 9)]
 max_depth_gbr = [int(x) for x in range(3,11)]
+
 random_grid = {'n_estimators': n_estimators,
                'max_features': max_features,
                'max_depth': max_depth,
@@ -54,8 +53,8 @@ rf_random = RandomizedSearchCV(estimator = rf,
                                random_state=42,
                                n_jobs = -1)
 # Fit the random search model
-rf_random.fit(rbe[0],rbe[1])
-print(rf_random.best_params_)
+# rf_random.fit(rbe[0],rbe[1])
+# print(rf_random.best_params_)
 gbr = GradientBoostingRegressor(random_state=1, n_estimators=10)
 
 
@@ -73,5 +72,11 @@ gbr_random = RandomizedSearchCV(estimator = gbr,
            verbose=2,
            random_state=42,
            n_jobs = -1)
-gbr_random.fit(rbe[0],rbe[1])
-print(gbr_random.best_params_)
+# gbr_random.fit(rbe[0],rbe[1])
+# print(gbr_random.best_params_)
+
+parameters = {'kernel': ('linear', 'rbf','poly'), 'C':[1.5, 10],'gamma': [1e-7, 1e-4],'epsilon':[0.1,0.2,0.5,0.3,0.05]}
+svr = SVR()
+clf =GridSearchCV(svr, parameters,cv=5)
+clf.fit(rbe[0],rbe[1])
+print(clf.best_params_)
