@@ -18,7 +18,6 @@ data_beta = data.drop(['alpha_x','beta_x','alpha_l'],axis=1)
 # Import Datasets for RBE model
 data_rbe=pd.read_csv('./data/data_rbe.csv')
 
-# basic preprocess
 def split(data,output):
     train,test=train_test_split(data ,train_size=0.9,test_size=0.1, random_state=11)
     X = train.drop(output, axis=1)
